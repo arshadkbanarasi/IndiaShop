@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndiaShop - Your Trusted E-commerce Partner</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2><i class="fas fa-store"></i> IndiaShop</h2>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for products...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="nav-menu">
+                <button class="nav-btn active" data-view="products">
+                    <i class="fas fa-home"></i> Products
+                </button>
+                <button class="nav-btn" data-view="cart">
+                    <i class="fas fa-shopping-cart"></i> 
+                    Cart (<span id="cartCount">0</span>)
+                </button>
+                <button class="nav-btn" data-view="orders">
+                    <i class="fas fa-box"></i> Orders
+                </button>
+                <button class="nav-btn" data-view="auth" id="authBtn">
+                    <i class="fas fa-user"></i> Login
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Products View -->
+        <section id="productsView" class="view active">
+            <div class="container">
+                <h1>Welcome to IndiaShop</h1>
+                <p class="subtitle">Discover amazing products at great prices!</p>
+                
+                <!-- Category Filter -->
+                <div class="category-filter">
+                    <button class="filter-btn active" data-category="all">All Products</button>
+                    <button class="filter-btn" data-category="Electronics">Electronics</button>
+                    <button class="filter-btn" data-category="Fashion">Fashion</button>
+                    <button class="filter-btn" data-category="Home">Home & Kitchen</button>
+                    <button class="filter-btn" data-category="Books">Books</button>
+                    <button class="filter-btn" data-category="Sports">Sports</button>
+                </div>
+                
+                <div id="productsGrid" class="products-grid">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details Modal -->
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="productDetails">
+                    <!-- Product details will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart View -->
+        <section id="cartView" class="view">
+            <div class="container">
+                <h1>Shopping Cart</h1>
+                <div id="cartItems">
+                    <!-- Cart items will be loaded here -->
+                </div>
+                <div id="cartSummary" class="cart-summary">
+                    <!-- Cart summary will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Modal -->
+        <div id="checkoutModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="checkoutForm">
+                    <h2>Checkout</h2>
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Shipping Address</label>
+                            <textarea id="shippingAddress" required placeholder="Enter your complete address with PIN code"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <select id="paymentMethod" required>
+                                <option value="">Select Payment Method</option>
+                                <option value="upi">UPI Payment</option>
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="netbanking">Net Banking</option>
+                                <option value="cod">Cash on Delivery</option>
+                            </select>
+                        </div>
+                        <div id="paymentDetails" class="payment-details">
+                            <!-- Payment specific fields will appear here -->
+                        </div>
+                        <div class="order-total">
+                            <h3>Total: ₹<span id="orderTotal">0</span></h3>
+                        </div>
+                        <button type="submit" class="btn primary">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders View -->
+        <section id="ordersView" class="view">
+            <div class="container">
+                <h1>Order History</h1>
+                <div id="ordersList">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Auth View -->
+        <section id="authView" class="view">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" data-tab="login">Login</button>
+                        <button class="tab-btn" data-tab="register">Register</button>
+                    </div>
+                    
+                    <div id="loginForm" class="auth-form active">
+                        <h2>Login to IndiaShop</h2>
+                        <form>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="loginEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="loginPassword" required>
+                            </div>
+                            <button type="submit" class="btn primary">Login</button>
+                        </form>
+                    </div>
+                    
+                    <div id="registerForm" class="auth-form">
+                        <h2>Register with IndiaShop</h2>
+                        <form>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="registerName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="registerEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="registerPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" id="registerPassword" required>
+                            </div>
+                            <button type="submit" class="btn primary">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Payment Gateway Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="paymentGateway">
+                <h2>IndiaShop Payment Gateway</h2>
+                <div class="payment-info">
+                    <p><strong>Order ID:</strong> <span id="paymentOrderId"></span></p>
+                    <p><strong>Amount:</strong> ₹<span id="paymentAmount"></span></p>
+                </div>
+                <div id="paymentForm">
+                    <!-- Payment form will be loaded based on method -->
+                </div>
+                <div class="payment-actions">
+                    <button id="payNowBtn" class="btn primary">Pay Now</button>
+                    <button id="cancelPaymentBtn" class="btn secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/payment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="Roboto-Regular-normal.js"></script> <!-- generated font file -->
+<script src="pdf-generator.js"></script>
+<script src="src/js/pdf-generator.js"></script>
+    <script src="js/pdf-generator.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
